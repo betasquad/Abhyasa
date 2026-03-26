@@ -1,275 +1,394 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SSC CGL Hub – Your Complete Exam Prep</title>
-  <meta name="description" content="Structured SSC CGL preparation with English, Quant, GK, Reasoning, and Computer topics.">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23f0a500'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-size='16' font-weight='700' fill='%23000'>S</text></svg>">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Abhyasa SSC — Personal study desk for SSC CGL preparation.">
+<title>Abhyasa SSC — StudyDesk</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- ─── Header ──────────────────────────────────── -->
-<header class="site-header">
-  <a href="index.html" class="logo">
-    <div class="logo-icon">SSC</div>
-    CGL Hub
-  </a>
-
-  <nav class="header-nav">
-    <a href="index.html" class="active">Home</a>
-    <a href="#subjects">Subjects</a>
-    <a href="#whats-new">What's New</a>
-  </nav>
-
-  <div class="header-right">
-    <!-- Logged out -->
-    <button class="btn-signin logged-out-only" data-open-auth>Sign In</button>
-
-    <!-- Logged in -->
-    <div class="user-menu logged-in-only">
-      <div class="flex gap-1" style="cursor:pointer" class="user-trigger">
-        <div class="avatar user-trigger">??</div>
-        <span class="user-label">User</span>
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--muted);margin-left:.2rem">
-          <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="user-dropdown">
-        <div class="dropdown-header">
-          <div class="name dropdown-name">User</div>
-          <div class="email dropdown-email">user@email.com</div>
-        </div>
-        <button class="dropdown-item" data-action="settings">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          Settings
-        </button>
-        <button class="dropdown-item danger" data-action="signout">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          Sign Out
-        </button>
-      </div>
-    </div>
-  </div>
+<!-- ─── HEADER ─── -->
+<header>
+  <div class="logo" onclick="goInfo()" title="Abhyasa SSC">Abhyasa <span>SSC</span></div>
 </header>
 
-
-<!-- ─── Hero ─────────────────────────────────────── -->
-<div class="page-hero fade-up">
-  <h1>SSC CGL Preparation Hub</h1>
-  <p>Structured study material for English, Quantitative Aptitude, General Awareness, Reasoning, and Computer Knowledge — all in one place.</p>
-</div>
-
-
-<!-- ═══════════════════════════════════════════════
-     LOGGED-IN DASHBOARD
-════════════════════════════════════════════════ -->
-<div class="dashboard logged-in-only" style="display:none">
-
-  <!-- Main column -->
-  <div class="dashboard-main">
-
-    <!-- Stats -->
-    <div class="stats-row fade-up">
-      <div class="stat-card">
-        <div class="stat-label">Today's Study</div>
-        <div class="stat-value amber" id="stat-today">0m</div>
-        <div class="stat-sub">Keep the streak going!</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Study Streak</div>
-        <div class="stat-value amber" id="stat-streak">0 days</div>
-        <div class="stat-sub">Consecutive days</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Total Time</div>
-        <div class="stat-value amber" id="stat-total">0h</div>
-        <div class="stat-sub">All sessions</div>
-      </div>
-    </div>
-
-    <!-- Next topics -->
-    <div class="next-topics fade-up fade-up-1">
-      <h2>Continue Where You Left Off</h2>
-      <div id="next-topics-list">
-        <!-- Populated by JS -->
-      </div>
-    </div>
-
-    <!-- Subject progress -->
-    <div class="card fade-up fade-up-2" style="margin-top:1.5rem">
-      <h2 style="font-family:var(--font-head);font-size:1.1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem">
-        <span style="width:3px;height:1.1em;background:var(--amber);border-radius:2px;display:inline-block"></span>
-        Subject-wise Completion
-      </h2>
-      <div id="progress-bars"></div>
-    </div>
-  </div>
-
-  <!-- Sidebar -->
-  <div class="dashboard-side">
-
-    <!-- Exam Countdown -->
-    <div class="card countdown-card fade-up">
-      <div class="countdown-title">⏱ Exam Countdown</div>
-      <div class="countdown-grid" id="countdown-display">
-        <div><div class="cd-num" id="cd-days">--</div><div class="cd-label">Days</div></div>
-        <div><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hrs</div></div>
-        <div><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Mins</div></div>
-        <div><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Secs</div></div>
-      </div>
-      <form class="exam-date-form" id="examDateForm">
-        <input type="date" id="examDateInput" title="Set your exam date">
-        <button type="submit" class="btn-set">Set</button>
-      </form>
-    </div>
-
-    <!-- What's New (sidebar on desktop) -->
-    <div class="card whats-new fade-up fade-up-1" id="whats-new">
-      <h2>What's New!</h2>
-      <div id="news-list-sidebar">
-        <!-- Populated by JS -->
-      </div>
-    </div>
-
-  </div>
-</div><!-- /dashboard -->
-
-
-<!-- ─── Heatmap ────────────────────────────────── -->
-<div class="heatmap-section logged-in-only" style="display:none">
-  <h2>Study Activity</h2>
-  <div class="heatmap-wrapper">
-    <div id="heatmap-grid"></div>
-    <div class="heatmap-footer">
-      <span>52 weeks of activity</span>
-      <div class="heatmap-legend flex gap-1">
-        Less
-        <div class="legend-cell"></div>
-        <div class="legend-cell" data-level="1"></div>
-        <div class="legend-cell" data-level="2"></div>
-        <div class="legend-cell" data-level="3"></div>
-        <div class="legend-cell" data-level="4"></div>
-        More
-      </div>
-    </div>
+<!-- ─── TOPIC SIDEBAR ─── -->
+<div class="tsb" id="topicBar">
+  <!-- Your Progress (above subjects) -->
+  <button class="tsb-btn progress-btn" id="tsb_progress" onclick="goProgress()">
+    <span class="tsb-ic">📊</span>
+    <span class="tsb-lbl">Your Progress</span>
+  </button>
+  <!-- Subject buttons + section label injected by JS -->
+  <!-- Abhyasa SSC (info page) -->
+  <button class="tsb-btn" id="tsb_info" onclick="goInfo()" style="color:var(--yellow);border-left-color:transparent;">
+    <span class="tsb-ic">🆕</span>
+    <span class="tsb-lbl">Abhyasa SSC</span>
+  </button>
+  <!-- User icon at bottom -->
+  <div class="tsb-user-wrap">
+    <div class="user-icon-wrap" id="userIconBtn" onclick="toggleUserPanel()" title="Account">A</div>
   </div>
 </div>
 
-
-<!-- ═══════════════════════════════════════════════
-     LOGGED-OUT & GENERAL CONTENT
-════════════════════════════════════════════════ -->
-
-<!-- What's New – always visible (standalone on logged-out) -->
-<div class="subjects-section logged-out-only" id="whats-new-standalone">
-  <div class="card whats-new" style="max-width:680px">
-    <h2>What's New!</h2>
-    <div id="news-list-main"></div>
+<!-- ─── USER PANEL ─── -->
+<div id="userOverlay" onclick="closeUserPanel()"></div>
+<div id="userPanel">
+  <div class="up-item" onclick="toggleTheme()">
+    <span class="up-item-icon" id="upThemeIcon">🌙</span>
+    <span class="up-item-label" id="upThemeLabel">Dark Mode</span>
+    <button class="up-toggle" id="upThemeToggle" onclick="event.stopPropagation();toggleTheme()"></button>
+  </div>
+  <div class="up-item" onclick="openSettings()">
+    <span class="up-item-icon">⚙️</span>
+    <span class="up-item-label">Settings</span>
+  </div>
+  <div class="up-item up-danger" onclick="signOut()">
+    <span class="up-item-icon">🚪</span>
+    <span class="up-item-label">Sign Out</span>
   </div>
 </div>
 
-<!-- Subjects Section -->
-<section class="subjects-section" id="subjects">
-  <h2 style="font-family:var(--font-head);font-size:1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem">
-    <span style="width:3px;height:1.15em;background:var(--amber);border-radius:2px;display:inline-block"></span>
-    Study Subjects
-  </h2>
-  <div class="subjects-grid" id="subjects-grid">
-    <!-- Populated by JS -->
-  </div>
-</section>
+<!-- ─── SIDEBAR TOGGLE ─── -->
+<button id="sbt" onclick="toggleSb()" title="Toggle sidebar (S)"><span class="arr">◀</span></button>
 
-
-<!-- ─── Footer ────────────────────────────────── -->
-<footer class="site-footer">
-  <p>SSC CGL Hub · Built for aspirants, by aspirants · Study hard, dream big.</p>
-</footer>
-
-
-<!-- ═══════════════════════════════════════════════
-     AUTH MODAL
-════════════════════════════════════════════════ -->
-<div class="modal-overlay" id="authModal">
-  <div class="modal">
-    <button class="modal-close" data-close-auth aria-label="Close">✕</button>
-
-    <!-- Login Form -->
-    <div id="loginForm">
-      <h2>Welcome Back</h2>
-      <p class="modal-sub">Sign in to track your progress and study time.</p>
-      <form>
-        <div class="form-group">
-          <label for="loginName">Your Name</label>
-          <input type="text" id="loginName" placeholder="Arjun Sharma" required autocomplete="name">
-        </div>
-        <div class="form-group">
-          <label for="loginEmail">Email</label>
-          <input type="email" id="loginEmail" placeholder="arjun@example.com" required autocomplete="email">
-        </div>
-        <button type="submit" class="btn-primary">Continue</button>
-      </form>
-      <p class="modal-alt">New here? <a href="#" id="switchToReg">Create account</a></p>
+<!-- ══════════════════════════════════════════
+     INFO VIEW — Abhyasa SSC (replaces What's New popup)
+══════════════════════════════════════════ -->
+<div id="infoView">
+  <div class="info-main">
+    <div class="info-hero">
+      <div class="info-title">🎓 Abhyasa SSC</div>
+      <p class="info-subtitle">Your personal study desk for SSC CGL preparation — PDFs, HTML notes, and videos, all in one place. Select a subject from the left to begin.</p>
     </div>
 
-    <!-- Register Form -->
-    <div id="regForm" style="display:none">
-      <h2>Create Account</h2>
-      <p class="modal-sub">Start your SSC CGL journey today.</p>
-      <form id="regFormInner">
-        <div class="form-group">
-          <label for="regName">Full Name</label>
-          <input type="text" id="regName" placeholder="Arjun Sharma" required>
+    <div class="info-section">
+      <div class="info-section-title">How to use</div>
+      <ol class="info-steps">
+        <li><strong>Pick a subject</strong> from the left sidebar — Reasoning, Maths, GA, English, or Computer.</li>
+        <li><strong>Choose your local folder</strong> for that subject when prompted. The app scans all subfolders automatically.</li>
+        <li><strong>Click any file</strong> to open it — PDFs and HTML files open inline; videos play with progress saved.</li>
+        <li><strong>Mark files done</strong> with the ✓ button. Your progress is saved locally and shown on the Your Progress page.</li>
+        <li><strong>Upload your Excel schedule</strong> (.xlsx) from the Your Progress page to see today's topics each day.</li>
+      </ol>
+    </div>
+
+    <div class="info-section">
+      <div class="info-section-title">Recent updates</div>
+      <div class="info-log">
+        <div class="info-log-item">
+          <div class="info-log-dot"></div>
+          <div class="info-log-content">
+            <strong>HTML file support</strong>
+            <span>Interactive HTML study files now open in a sandboxed viewer alongside PDFs and videos. Filter by type using the HTML tab in the file sidebar.</span>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="regEmail">Email</label>
-          <input type="email" id="regEmail" placeholder="arjun@example.com" required>
+        <div class="info-log-item">
+          <div class="info-log-dot"></div>
+          <div class="info-log-content">
+            <strong>Subjects panel</strong>
+            <span>The left sidebar now shows full subject names. Your Progress and Abhyasa SSC are pinned at the top and bottom for quick access.</span>
+          </div>
         </div>
-        <button type="submit" class="btn-primary" id="regSubmit">Create Account</button>
-      </form>
-      <p class="modal-alt">Already have an account? <a href="#" id="switchToLogin">Sign in</a></p>
+        <div class="info-log-item">
+          <div class="info-log-dot"></div>
+          <div class="info-log-content">
+            <strong>Bottom navigation bar</strong>
+            <span>Prev and Next controls moved to the bottom bar, with the subject name and current file shown in the centre.</span>
+          </div>
+        </div>
+        <div class="info-log-item">
+          <div class="info-log-dot"></div>
+          <div class="info-log-content">
+            <strong>File limit guard</strong>
+            <span>Folders with more than 500 files show a warning instead of freezing the browser.</span>
+          </div>
+        </div>
+        <div class="info-log-item">
+          <div class="info-log-dot"></div>
+          <div class="info-log-content">
+            <strong>Data migration</strong>
+            <span>Existing planner data from the previous version is automatically carried over on first load.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-section-title">Browser requirement</div>
+      <p style="font-size:.84rem;color:var(--t2);line-height:1.7;">
+        This app uses the <strong style="color:var(--tx)">File System Access API</strong>, which requires <strong style="color:var(--tx)">Chrome or Edge (desktop)</strong>. Firefox and Safari are not supported. Folder access is re-requested each session — this is a browser security requirement, not a bug.
+      </p>
+    </div>
+
+    <div class="info-footer">
+      <p style="font-size:.82rem;color:var(--mt);">Questions or feedback? <a class="info-contact" onclick="contactUs()">Contact Us</a></p>
     </div>
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════
+     PROGRESS VIEW — Your Progress (planner)
+══════════════════════════════════════════ -->
+<div id="progressView">
+  <div class="hm-main">
 
-<script src="assets/js/app.js"></script>
+    <div class="hm-card" id="hmDateBanner" style="animation-delay:.0s">
+      <div class="hm-day-num" id="hmDayNum"></div>
+      <div>
+        <div class="hm-day-name" id="hmDayName"></div>
+        <div class="hm-day-full" id="hmDayFull"></div>
+      </div>
+      <div class="hm-banner-stat">
+        <div class="hm-banner-lbl">Days Studied</div>
+        <div class="hm-banner-num" id="hmHeaderStudied">—</div>
+      </div>
+      <div class="hm-banner-streak">
+        <div class="hm-streak-num" id="hmHeaderStreak">—</div>
+        <div class="hm-banner-lbl">🔥 Streak</div>
+      </div>
+    </div>
+
+    <div class="hm-card" id="hmGoalCard" style="animation-delay:.03s">
+      <div class="hm-card-title">🎯 Exam Goal</div>
+      <div id="hmGoalBody">
+        <div class="hm-goal-row">
+          <input type="text" class="hm-goal-input" id="hmGoalName" placeholder="Exam name (e.g. SSC CGL Tier 1)">
+          <input type="date" class="hm-goal-input" id="hmGoalDate" style="max-width:160px">
+          <button class="hm-goal-save" onclick="saveGoal()">Save</button>
+        </div>
+        <div id="hmGoalCountdown"></div>
+      </div>
+    </div>
+
+    <div class="hm-card" id="hmTimeCard" style="animation-delay:.04s">
+      <div class="hm-card-title">⏱ Study Time</div>
+      <div class="hm-time-row" id="hmTimeRow"></div>
+    </div>
+
+    <div class="hm-card" id="hmTopicsCard" style="animation-delay:.05s">
+      <div class="hm-card-title">Today's Topics</div>
+      <div id="hmTopicsBody"><p class="hm-no-topics">Upload your Excel schedule (.xlsx) via the 📂 button to see today's topics.</p></div>
+    </div>
+
+    <div class="hm-card" id="hmMediaCard" style="animation-delay:.08s">
+      <div class="hm-card-title">📊 Resources Completed — Per Subject</div>
+      <div id="hmMediaGrid"></div>
+    </div>
+
+    <div class="hm-card" id="hmCheckCard" style="animation-delay:.10s">
+      <div class="hm-card-title">Today's Study Status</div>
+      <div class="hm-check-grid" id="hmCheckGrid"></div>
+      <div class="hm-save-row">
+        <button class="hm-btn-save" id="hmSaveToday">Save Today</button>
+        <span id="hmSaveMsg">✓ Saved</span>
+      </div>
+    </div>
+
+    <div class="hm-card" id="hmRecentCard" style="animation-delay:.12s">
+      <div class="hm-card-title">🕐 Recently Opened</div>
+      <div id="hmRecentBody"><p class="hm-no-topics">No files opened yet.</p></div>
+    </div>
+
+    <div class="hm-card" id="hmHeatCard" style="animation-delay:.15s">
+      <div class="hm-card-title">📅 Activity — Last 16 Weeks</div>
+      <div class="hm-heat-wrap" id="hmHeatWrap"></div>
+    </div>
+
+    <div class="hm-card" id="hmProgressCard" style="animation-delay:.20s">
+      <div class="hm-card-title">Overall Progress</div>
+      <div class="hm-stat-row" id="hmStatRow"></div>
+      <div id="hmProgressBars"></div>
+    </div>
+
+    <div class="hm-card" id="hmSubjectCard" style="animation-delay:.25s">
+      <div class="hm-card-title">Subject-wise Completion</div>
+      <div class="hm-subj-grid" id="hmSubjectGrid"></div>
+    </div>
+
+    <div class="hm-card" id="hmAlmostCard" style="animation-delay:.30s">
+      <div class="hm-card-title">Almost-Counted Days</div>
+      <div id="hmAlmostBody"><p class="hm-no-topics" style="font-size:.76rem">No near-miss days found.</p></div>
+    </div>
+
+    <div class="hm-card" id="hmRuleCard" style="animation-delay:.35s">
+      <div class="hm-card-title">Counting Rule</div>
+      <div class="hm-rule-row">
+        <label>Count day if at least</label>
+        <select class="hm-select" id="hmMinSubjects">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3" selected>3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <label>subject(s) completed</label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STUDY VIEW
+══════════════════════════════════════════ -->
+<main id="studyView">
+  <aside id="sb">
+    <!-- Search + Sort — shown only once files are loaded -->
+    <div class="sb-hd" id="sbHd">
+      <input type="text" id="si" placeholder="🔍 Filter files…" oninput="filterFiles(this.value)">
+      <select id="sortSel" onchange="applySort()" title="Sort">
+        <option value="name">A→Z</option>
+        <option value="namez">Z→A</option>
+        <option value="undone">Unseen first</option>
+        <option value="type">Type</option>
+      </select>
+    </div>
+
+    <!-- Status row -->
+    <div class="sbst" id="sst">
+      <div class="ssp"><div class="sspdot" style="background:var(--acc)"></div><span id="stot">0 files</span></div>
+      <div class="ssp"><div class="sspdot" style="background:var(--suc)"></div><span id="sdn">0 done</span></div>
+    </div>
+
+    <!-- File list (or "choose folder" prompt) -->
+    <div class="flist" id="fl">
+      <div class="cf-wrap">
+        <div class="cf-icon">📂</div>
+        <div class="cf-subj">Select a subject</div>
+        <p class="cf-hint">Click a subject in the left panel to get started.</p>
+      </div>
+    </div>
+
+    <!-- Footer: progress bar + jump buttons -->
+    <div class="sb-foot" id="sbFoot">
+      <div class="sb-prog"><div class="sb-prog-fill" id="sbProgFill" style="width:0%"></div></div>
+      <button class="bjump"       id="bjump"       onclick="scrollA()">⬆ Jump to current file</button>
+      <button class="bjump-unseen" id="bjumpUnseen" onclick="jumpUnseen()">⬇ Jump to first unseen</button>
+    </div>
+  </aside>
+
+  <!-- Viewer -->
+  <div class="vw" id="vw">
+    <div class="pgt"><div class="pgf" id="pgf" style="width:0%"></div></div>
+    <!-- kept for JS compat, hidden via CSS -->
+    <div class="vtb"><div class="vlbl" id="vlbl"></div></div>
+    <div id="subjBanner"><span id="subjBannerIcon"></span><span id="subjBannerName"></span></div>
+
+    <div class="vbd">
+      <div class="vct" id="vc">
+        <div class="vph">
+          <div class="vphi">🎓</div>
+          <div class="vpht">Ready to Study</div>
+          <div class="vphs">Select a subject from the left panel, then choose a folder to load your files.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="viewer-nav" id="viewerNav">
+      <button class="bnav" id="bprev" onclick="nav(-1)" disabled>← Prev</button>
+      <div class="vn-centre">
+        <div class="vn-subject" id="vnSubject" style="display:none">
+          <span class="vn-subj-icon" id="vnSubjIcon"></span>
+          <span id="vnSubjName">—</span>
+        </div>
+        <div class="vn-filename empty" id="vnFilename">No file open</div>
+      </div>
+      <div class="pp" id="pp">—</div>
+      <button class="bnav" id="bnext" onclick="nav(1)" disabled>Next →</button>
+    </div>
+  </div>
+</main>
+
+<!-- ── FAB — Excel upload (progress view only) ── -->
+<div class="fab-wrap">
+  <div class="fab-tip">Upload Excel schedule (.xlsx)</div>
+  <label class="fab-label" title="Upload schedule">
+    📂<input type="file" id="fileInput" accept=".xlsx,.xls">
+  </label>
+</div>
+
+<!-- ── Contact Us Modal ── -->
+<div id="contactOverlay" onclick="closeContact(event)" style="position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:600;opacity:0;pointer-events:none;transition:opacity .24s;display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div id="contactModal" style="background:var(--sur);border:1px solid var(--bdr);border-radius:16px;width:100%;max-width:460px;box-shadow:0 12px 48px var(--shd);transform:translateY(20px) scale(.97);transition:transform .24s cubic-bezier(.4,0,.2,1);overflow:hidden;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 22px 16px;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,var(--acc-08),var(--card));">
+      <div>
+        <div style="font-size:1.05rem;font-weight:800;color:var(--tx);">✉️ Contact Us</div>
+        <div style="font-size:.7rem;color:var(--mt);margin-top:3px;">Support &amp; feedback</div>
+      </div>
+      <button onclick="closeContact()" style="width:30px;height:30px;border-radius:8px;background:none;border:1px solid var(--bdr);color:var(--mt);font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+    </div>
+    <div style="padding:20px 22px;display:flex;flex-direction:column;gap:14px;">
+      <div><label style="display:block;font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:5px;">Your Name</label>
+      <input type="text" id="cmName" placeholder="e.g. Rahul Sharma" style="width:100%;background:var(--c2);border:1px solid var(--b2);border-radius:8px;color:var(--tx);font-size:.85rem;padding:9px 12px;outline:none;"></div>
+      <div><label style="display:block;font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:5px;">Email</label>
+      <input type="email" id="cmEmail" placeholder="you@example.com" style="width:100%;background:var(--c2);border:1px solid var(--b2);border-radius:8px;color:var(--tx);font-size:.85rem;padding:9px 12px;outline:none;"></div>
+      <div><label style="display:block;font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mt);margin-bottom:5px;">Message</label>
+      <textarea id="cmMessage" placeholder="Tell us what's on your mind…" style="width:100%;background:var(--c2);border:1px solid var(--b2);border-radius:8px;color:var(--tx);font-size:.85rem;padding:9px 12px;outline:none;resize:none;min-height:100px;line-height:1.6;font-family:'Outfit',sans-serif;"></textarea></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;padding:0 22px 20px;">
+      <button onclick="closeContact()" style="background:none;border:1px solid var(--bdr);color:var(--t2);border-radius:8px;padding:9px 18px;font-size:.82rem;font-weight:600;cursor:pointer;">Cancel</button>
+      <button id="cmSendBtn" onclick="submitContact()" style="background:var(--acc);color:#fff;border:none;border-radius:8px;padding:9px 22px;font-size:.82rem;font-weight:700;cursor:pointer;box-shadow:0 2px 12px var(--acc-25);">Send Message</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<div id="kbh">
+  <span><kbd>1</kbd>–<kbd>5</kbd> Subject</span>
+  <span><kbd>S</kbd> Sidebar</span>
+  <span><kbd>H</kbd> Hide header</span>
+  <span><kbd>Space</kbd> ✓ Done</span>
+  <span><kbd>?</kbd> Help</span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/planner.js"></script>
+<script src="js/app.js"></script>
 <script>
-// ── What's New data (edit this array to update announcements) ──
-const NEWS = [
-  { type: 'new',   title: 'Grammar Section Updated – Subject-Verb Agreement added',      date: '2025-06-10' },
-  { type: 'quiz',  title: '📝 Quiz: Vocabulary Set 2 goes live on June 15, 2025',         date: '2025-06-08' },
-  { type: 'notif', title: 'SSC CGL 2025 Tier-I notification expected in July',            date: '2025-06-05' },
-  { type: 'new',   title: 'Arithmetic – Ratio & Proportion (Topic 1.2.03) published',    date: '2025-06-01' },
-  { type: 'notif', title: 'New batch of Current Affairs topics added to General Awareness', date: '2025-05-28' },
-];
-
-function renderNews(containerId) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  el.innerHTML = NEWS.map(n => `
-    <div class="news-item ${n.type}">
-      <div class="news-title">${n.title}</div>
-      <div class="news-date">${n.date}</div>
-    </div>`).join('');
+/* ── Contact Us (Formspree) ── */
+function contactUs(){
+  document.getElementById('contactOverlay').style.opacity='1';
+  document.getElementById('contactOverlay').style.pointerEvents='all';
+  document.getElementById('contactModal').style.transform='translateY(0) scale(1)';
 }
-document.addEventListener('DOMContentLoaded', () => {
-  renderNews('news-list-main');
-  renderNews('news-list-sidebar');
-
-  // Register form
-  document.getElementById('regFormInner')?.addEventListener('submit', e => {
-    e.preventDefault();
-    const name  = document.getElementById('regName').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    if (name && email) {
-      SSC.Auth.login(name, email);
-      document.getElementById('authModal').classList.remove('open');
-      initDashboard();
-    }
-  });
-});
+function closeContact(e){
+  if(e && e.target !== document.getElementById('contactOverlay')) return;
+  document.getElementById('contactOverlay').style.opacity='0';
+  document.getElementById('contactOverlay').style.pointerEvents='none';
+  document.getElementById('contactModal').style.transform='translateY(20px) scale(.97)';
+}
+async function submitContact(){
+  const name = document.getElementById('cmName').value.trim();
+  const email= document.getElementById('cmEmail').value.trim();
+  const msg  = document.getElementById('cmMessage').value.trim();
+  if(!name){ toast('Please enter your name','warn'); return; }
+  if(!email||!email.includes('@')){ toast('Please enter a valid email','warn'); return; }
+  if(!msg){ toast('Please write a message','warn'); return; }
+  const btn = document.getElementById('cmSendBtn');
+  btn.textContent='Sending…'; btn.disabled=true;
+  try{
+    /* Replace YOUR_FORM_ID with your Formspree form ID from formspree.io */
+    const res = await fetch('https://formspree.io/f/YOUR_FORM_ID',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name,email,message:msg})
+    });
+    if(res.ok){
+      closeContact();
+      document.getElementById('cmName').value='';
+      document.getElementById('cmEmail').value='';
+      document.getElementById('cmMessage').value='';
+      toast('✉️ Message sent — thank you!');
+    } else { toast('Send failed — please try again','warn'); }
+  }catch(_){ toast('No connection — message not sent','warn'); }
+  finally{ btn.textContent='Send Message'; btn.disabled=false; }
+}
 </script>
 </body>
 </html>
